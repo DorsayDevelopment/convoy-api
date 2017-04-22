@@ -1,0 +1,33 @@
+{
+  "name": "convoy-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "set-db": "",
+    "migrate": "gulp migrate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DorsayDevelopment/convoy-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DorsayDevelopment/convoy-api/issues"
+  },
+  "homepage": "https://github.com/DorsayDevelopment/convoy-api#readme",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.1.1",
+    "node-pg-migrate": "^1.3.0",
+    "pg": "^6.1.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-exec": "^2.1.3",
+    "gulp-util": "^3.0.8"
+  }
+}
