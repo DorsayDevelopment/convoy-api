@@ -1,8 +1,8 @@
+const usersController = require('../controllers/usersController');
 const Router = require('koa-router');
 const router = new Router({
   prefix: '/users'
 });
-const usersController = require('../controllers/usersController');
 
 router.get('/', async ctx => {
   ctx.body = await usersController.getUsers();
