@@ -6,8 +6,13 @@ exports.createUser = async function(data) {
   let user = new User();
   user.username = data.username;
   user.password = data.password;
-  await user.save();
-  return user;
+  try {
+    let result = await user.save();
+    return user;
+  } catch(err) {
+    console.log(err.message);
+    return `Error saving user: ${err.message}`;
+  }
 };
 
 exports.deleteUser = async function(id) {
@@ -18,15 +23,12 @@ exports.deleteUser = async function(id) {
 
 exports.getUserById = async function(id) {
   var rows = await db.query(`select * from users where id = ${id};`);
-  if(rows.length == 0)
-    return null;
-  else {
-    let row = rows[0];
-    let user = new User();
-    user.username = row.username;
-    user.id = row.id;
-    return user;
-  }
+  let row = rows.rows[0];
+  let user = new User();
+  console.log(row)
+  user.username = row.username;
+  user.id = row.id;
+  return user;
 };
 
 exports.getUsers = async function() {

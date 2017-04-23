@@ -4,12 +4,12 @@ const router = new Router({
 });
 const usersController = require('../controllers/usersController');
 
-router.get('/', async function(ctx) {
+router.get('/', async ctx => {
   ctx.body = await usersController.getUsers();
 });
 
-router.get('/:id', ctx => {
-  ctx.body = ctx.originalUrl;
+router.get('/:id', async ctx => {
+  ctx.body = await usersController.getUserById(ctx.params.id);
 });
 
 router.post('/', async ctx => {

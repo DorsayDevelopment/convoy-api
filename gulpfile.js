@@ -4,8 +4,6 @@ const
   exec = require('child_process').exec,
   path = require('path');  
 
-const isWindows = /^win/.test(process.platform);
-
 gulp.task('set-dev-database-url', function() {
   return process.env.DATABASE_URL = 'postgres://postgres:root@localhost:5432/convoy';
 });
