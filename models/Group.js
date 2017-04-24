@@ -4,10 +4,9 @@ class Group {
   constructor(name) {
     this.id;
     this.name = name;
-    this.members;
-    this.stops;
-    this.start;
-    this.end;
+    this.members; // array of member ids
+    this.origin; // place id
+    this.destination; // place id
   }
 
   async sendLocationUpdates() {
