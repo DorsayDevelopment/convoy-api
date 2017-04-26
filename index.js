@@ -1,9 +1,11 @@
 const
   Koa = require('koa'),
   app = new Koa(),
-  bodyParser = require('koa-bodyparser');
+  bodyParser = require('koa-bodyparser'),
+  passport = require('koa-passport');
 
 app.use(bodyParser());
+app.use(passport.initialize())
 
 app.use(async (ctx, next) => {
   const start = new Date();

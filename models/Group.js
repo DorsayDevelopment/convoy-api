@@ -9,7 +9,11 @@ class Group {
     this.destination; // place id
   }
 
-  async sendLocationUpdates() {
+  async save() {
+      
+    let result = await db.query(`insert into places (name) values ('${this.name}') returning id;`);
+    this.id = result.rows[0].id;
+    return 'group created';
 
   }
 }
