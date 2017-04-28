@@ -7,7 +7,8 @@ exports.createUser = async function(data) {
   user.username = data.username;
   user.password = data.password;
   try {
-    let result = await user.save();
+    let result = await user.create();
+    // delete user.password;
     return user;
   } catch(err) {
     return `Error saving user: ${err.message}`;
@@ -33,8 +34,3 @@ exports.getUsers = async function() {
   var result = await db.query(`select id, username from users;`);
   return result.rows;
 };
-
-exports.login = async function(username, password) {
-
-};
-

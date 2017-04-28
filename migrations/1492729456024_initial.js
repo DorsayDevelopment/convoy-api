@@ -9,7 +9,8 @@ exports.up = function(pgm) {
   pgm.createTable('users', {
     id: 'id',
     username: 'text',
-    password: 'text'
+    password: 'text',
+    token: 'text'
   });
 
   pgm.createTable('groups', {

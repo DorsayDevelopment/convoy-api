@@ -4,6 +4,8 @@ const
   bodyParser = require('koa-bodyparser'),
   passport = require('koa-passport');
 
+require('./auth')(passport);
+
 app.use(bodyParser());
 app.use(passport.initialize())
 
@@ -22,5 +24,6 @@ app.use(async (ctx, next) => {
 });
 
 app.use(require('./routes/user-routes'));
+app.use(require('./routes/auth-routes'));
 
 app.listen(9000);

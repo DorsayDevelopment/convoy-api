@@ -5,7 +5,7 @@ const
 exports.createGroup = async data => {
   let group = new Group(data.name);
   try {
-    let result = await group.save();
+    let result = await group.create();
     return group;
   } catch(err) {
     return `Error saving group: ${err.message}`;

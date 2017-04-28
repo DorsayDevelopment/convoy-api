@@ -1,9 +1,9 @@
 const pg = require('pg');
 
 const config = {
-  user: 'brycen', //env var: PGUSER
+  user: 'postgres', //env var: PGUSER
   database: 'convoy', //env var: PGDATABASE
-  password: 'dorsay', //env var: PGPASSWORD
+  password: 'root', //env var: PGPASSWORD
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
