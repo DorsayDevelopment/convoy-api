@@ -40,10 +40,6 @@ class User {
     return result.rowCount > 0;
   }
 
-  update() {
-    console.log('update the user');
-  }
-
   delete() {
     console.log('delete the user');
   }
@@ -59,6 +55,16 @@ class User {
     return user;
   }
 
+  static async findById(id) {
+    let result = await db.query(`select id, username from users where id = '${id}';`);
+    if(result.rows.length != 1) return null;
+    result = result.rows[0];
+    let user = new User();
+    user.id = result.id;
+    user.username = result.username;
+    return user;
+  }
+
   async checkPassword(password) {
     return await bcrypt.compare(password, this.password);
   }
@@ -66,7 +72,7 @@ class User {
   async setJwt(token) {
     this.token = jwt.sign({
       id: this.id
-    }, SECRET, { expiresIn: '1M' });
+    }, SECRET, { expiresIn: '30d' });
   }
 
   static async hashPassword(password) {

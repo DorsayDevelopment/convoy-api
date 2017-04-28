@@ -29,10 +29,9 @@ module.exports = passport => {
     jwtFromRequest: ExtractJwt.fromAuthHeader(),
     secretOrKey: 'secret'
   }, async function(payload, done) {
-    let user = await User.findByUsername(username);
+    let user = await User.findById(payload.id);
     if(!user) return done(null, false)
     return done(null, user);
   }));
-
 }
 
