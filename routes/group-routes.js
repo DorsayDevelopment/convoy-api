@@ -5,18 +5,22 @@ const router = new Router({
   prefix: '/groups'
 });
 
-router.use(passport.authenticate('jwt', { session: false }))
+router.use(passport.authenticate('jwt', { session: false }));
 
 router.get('/', async ctx => {
-  ctx.body = await controller.getGroups();
+  ctx.body = await controller.getGroups(ctx.state.user.id);
 });
 
 router.get('/:id', async ctx => {
-  ctx.body = 'Get group by Id';
+  ctx.body = await controller.getGroupById(ctx.params.id, ctx.state.user.id);
 });
 
 router.post('/', async ctx => {
-  ctx.body = await controller.createGroup(ctx.request.body);
+  ctx.body = await controller.createGroup(ctx.request.body, ctx.state.user.id);
+});
+
+router.post('/:groupId/members/:userId', async ctx => {
+  ctx.body = await controller.addMember(ctx.params.groupId, ctx.params.groupId, ctx.state.user.id);
 });
 
 module.exports = router.routes();

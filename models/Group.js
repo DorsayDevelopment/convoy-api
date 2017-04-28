@@ -19,10 +19,11 @@ class Group {
   }
 
   async addMember(userId) {
+    // TODO: add primary key constraint migration for group_id and user_id
     let result = await db.query(`
       insert into group_users (group_id, user_id)
       values ('${this.id}', '${userId}')
-      returning id;
+      ON CONFLICT (group_id, user_id) DO NOTHING;
     `);
     return;
   }
@@ -39,11 +40,35 @@ class Group {
       select users.id, users.username from users
       join group_users on users.id = group_users.user_id
     `);
-    let users = result.rows.map(row => {
-      console.log(row);
-    });
-    return;
+    return result.rows.map(row => row);
+  }
+
+  static async getGroupById(groupId, userId) {
+    let result = await db.query(`
+      select id, name, origin, destination from groups where id in
+        (select group_id from group_users where user_id = ${userId} and group_id = ${groupId});
+    `);
+    if(result.rows.length === 0) return null;
+    let row = result.rows[0];
+    let group = new Group();
+    group.id = row.id;
+    group.name = row.name;
+    group.origin = row.origin;
+    group.destination = row.destination;
+    return group;
+  };
+
+  static async addMember(groupId, userId) {
+    let result = await db.query(`
+      insert into group_users (group_id, user_id)
+      values ('${groupId}', '${userId}');
+    `);
   }
 }
 
 module.exports = Group;
+
+// select groups.id as group_id, groups.name as group_name, users.id as user_id, users.username from groups
+//       left join group_users on group_users.group_id = groups.id
+//       left join users on users.id = group_users.user_id
+//       where groups.id = ${id};
