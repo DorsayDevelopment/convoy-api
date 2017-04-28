@@ -16,8 +16,14 @@ exports.up = function(pgm) {
   pgm.createTable('groups', {
     id: 'id',
     name: 'text',
-    members: 'integer[]',
-    places: 'integer[]'
+    origin: 'integer',
+    destination: 'integer'
+  });
+
+  pgm.createTable('group_users', {
+    id: 'id',
+    group_id: 'integer',
+    user_id: 'integer'
   });
 
   pgm.createTable('places', {
@@ -34,5 +40,6 @@ exports.down = function(pgm) {
   pgm.dropTable('users');
   pgm.dropTable('places');
   pgm.dropTable('groups');
+  pgm.dropTable('group_users');
   pgm.dropType('place_type');
 };

@@ -4,10 +4,16 @@ const
 
 exports.createGroup = async data => {
   let group = new Group(data.name);
+  
   try {
     let result = await group.create();
     return group;
   } catch(err) {
     return `Error saving group: ${err.message}`;
   }
+};
+
+exports.getGroups = async () => {
+  var result = await db.query(`select id, name from groups;`);
+  return result.rows;
 };

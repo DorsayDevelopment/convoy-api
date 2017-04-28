@@ -8,7 +8,6 @@ exports.createUser = async function(data) {
   user.password = data.password;
   try {
     let result = await user.create();
-    // delete user.password;
     return user;
   } catch(err) {
     return `Error saving user: ${err.message}`;
@@ -31,6 +30,6 @@ exports.getUserById = async function(id) {
 };
 
 exports.getUsers = async function() {
-  var result = await db.query(`select id, username from users;`);
+  let result = await db.query(`select id, username from users;`);
   return result.rows;
 };

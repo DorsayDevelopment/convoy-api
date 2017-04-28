@@ -25,5 +25,6 @@ app.use(async (ctx, next) => {
 
 app.use(require('./routes/user-routes'));
 app.use(require('./routes/auth-routes'));
+app.use(require('./routes/group-routes'));
 
 app.listen(9000);
