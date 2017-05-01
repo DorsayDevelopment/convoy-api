@@ -10,23 +10,23 @@ exports.up = function(pgm) {
     id: 'id',
     username: 'text',
     password: 'text',
-    token: 'text'
+    tokens: 'text[]'
   });
 
-  pgm.createTable('groups', {
+  pgm.createTable('group', {
     id: 'id',
     name: 'text',
     origin: 'integer',
     destination: 'integer'
   });
 
-  pgm.createTable('group_users', {
+  pgm.createTable('group_user', {
     id: 'id',
     group_id: 'integer',
     user_id: 'integer'
   });
 
-  pgm.createTable('places', {
+  pgm.createTable('place', {
     id: 'id',
     name: 'text',
     lat: 'double',
@@ -38,8 +38,8 @@ exports.up = function(pgm) {
 
 exports.down = function(pgm) {
   pgm.dropTable('users');
-  pgm.dropTable('places');
-  pgm.dropTable('groups');
-  pgm.dropTable('group_users');
+  pgm.dropTable('place');
+  pgm.dropTable('group');
+  pgm.dropTable('group_user');
   pgm.dropType('place_type');
 };

@@ -4,6 +4,8 @@ const
   ExtractJwt = require('passport-jwt').ExtractJwt,
   User = require('./models/User');
 
+const SECRET = 'secret';
+
 module.exports = passport => {
   passport.use(new BasicStrategy(async function(username, password, done) {
 
@@ -24,11 +26,11 @@ module.exports = passport => {
 
   }));
 
-
   passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeader(),
-    secretOrKey: 'secret'
-  }, async function(payload, done) {
+    secretOrKey: 'secret',
+    passReqToCallback: true
+  }, async function(request, payload, done) {
     let user = await User.findById(payload.id);
     if(!user) return done(null, false)
     return done(null, user);

@@ -5,8 +5,8 @@ const
   path = require('path');
 
 // This is config management until I get around to docker, probably
-// const dbConnection = 'postgres://postgres:root@localhost:5432/convoy';
-const dbConnection = 'postgres://brycen:dorsay@localhost:5432/convoy';
+const dbConnection = 'postgres://postgres:root@localhost:5432/convoy';
+// const dbConnection = 'postgres://brycen:dorsay@localhost:5432/convoy';
 
 gulp.task('set-dev-database-url', function() {
   return process.env.DATABASE_URL = dbConnection;

@@ -15,14 +15,14 @@ exports.createUser = async function(data) {
 };
 
 exports.deleteUser = async function(id) {
-  await db.query(`delete from user where id = ${id};`);
+  await db.query(`delete from users where id = ${id};`);
   return 'user probably deleted';
 };
 
 exports.getUserById = async function(id) {
   var rows = await db.query(`select * from users where id = ${id};`);
   let row = rows.rows[0];
-  if(!row) return 'no users found';
+  if(!row) return 'no user found';
   return new User({
     username: row.username,
     id: row.id

@@ -29,8 +29,8 @@ exports.createGroup = async (data, userId) => {
  */
 exports.getGroups = async userId => {
   let result = await db.query(`
-    select id, name from groups where id in 
-	    (select group_id from group_users where user_id = ${userId});
+    select id, name from group where id in 
+	    (select group_id from group_user where user_id = ${userId});
   `);
   return result.rows;
 };

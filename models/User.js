@@ -11,7 +11,7 @@ class User {
     this.id;
     this.username = username;
     this.password = password;
-    this.token;
+    this.tokens = [];
   }
 
   async create() {
@@ -20,7 +20,7 @@ class User {
 
       this.password = await User.hashPassword(this.password, SALT_ROUNDS);
       
-      let result = await db.query(`insert into users (username, password) values ('${this.username}', '${this.password}') returning id;`);
+      let result = await db.query(`insert into user (username, password) values ('${this.username}', '${this.password}') returning id;`);
       this.id = result.rows[0].id;
       return 'user created';
 
@@ -29,7 +29,7 @@ class User {
 
   async save() {
     let result = await db.query(`
-        update users set token = '${this.token}', username = '${this.username}'
+        update user set token = ${this.tokens}, username = '${this.username}'
         where id = '${this.id}';
     `);
     return;
@@ -70,9 +70,17 @@ class User {
   }
 
   async setJwt(token) {
-    this.token = jwt.sign({
+    this.token.push(jwt.sign({
       id: this.id
-    }, SECRET, { expiresIn: '30d' });
+    }, SECRET, { expiresIn: '30d' }));
+  }
+
+  async invalidateJwt(token) {
+
+  }
+
+  async invalidateAllJwt() {
+
   }
 
   static async hashPassword(password) {
