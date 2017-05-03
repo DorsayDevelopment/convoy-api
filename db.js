@@ -1,11 +1,11 @@
 const pg = require('pg');
 
 const config = {
-  user: 'brycen', //env var: PGUSER
-  database: 'convoy', //env var: PGDATABASE
-  password: 'dorsay', //env var: PGPASSWORD
-  host: 'localhost', // Server hosting the postgres database
-  port: 5432, //env var: PGPORT
+  user: process.env.API_DB_USER || 'postgres', //env var: PGUSER
+  database: process.env.API_DB_NAME || 'convoy', //env var: PGDATABASE
+  password: process.env.API_DB_PASSWORD || 'postgres', //env var: PGPASSWORD
+  host: process.env.API_DB_HOST || 'localhost', // Server hosting the postgres database
+  port: process.env.API_DB_PORT || 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 };

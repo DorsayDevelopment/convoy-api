@@ -3,9 +3,10 @@ const
   db = require('../db');
 
 exports.createUser = async function(data) {
-  let user = new User();
-  user.username = data.username;
-  user.password = data.password;
+  let user = new User({
+    username: data.username,
+    password: data.password
+  });
   try {
     let result = await user.create();
     return user;

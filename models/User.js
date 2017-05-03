@@ -29,7 +29,7 @@ class User {
 
   async save() {
     let result = await db.query(`
-        update user set token = ${this.tokens}, username = '${this.username}'
+        update user set tokens = ${this.tokens}, username = '${this.username}'
         where id = '${this.id}';
     `);
     return;
@@ -70,7 +70,7 @@ class User {
   }
 
   async setJwt(token) {
-    this.token.push(jwt.sign({
+    this.tokens.push(jwt.sign({
       id: this.id
     }, SECRET, { expiresIn: '30d' }));
   }

@@ -6,6 +6,8 @@ const
 
 require('./auth')(passport);
 
+const PORT = process.env.API_PORT || 9000;
+
 app.use(bodyParser());
 app.use(passport.initialize())
 
@@ -27,4 +29,5 @@ app.use(require('./routes/user-routes'));
 app.use(require('./routes/auth-routes'));
 app.use(require('./routes/group-routes'));
 
-app.listen(9000);
+app.listen(PORT);
+console.log('api started');
