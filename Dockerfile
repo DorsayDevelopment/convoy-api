@@ -1,15 +1,9 @@
 FROM node
 
-RUN apk update && apk add --virtual build-dependencies \
-  build-base \
-  gcc \
-  wget \
-  git
-
 WORKDIR /src
 COPY package.json /src
 
-RUN npm i --only=production --silent
+RUN npm i --production --silent
 
 COPY . /src
 
